@@ -1,0 +1,19 @@
+{
+  "name": "xisruoyhctaw",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shanenolanwit/xisruoyhctaw.git"
+  },
+  "author": "Shane Nolan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shanenolanwit/xisruoyhctaw/issues"
+  },
+  "homepage": "https://github.com/shanenolanwit/xisruoyhctaw#readme"
+}
