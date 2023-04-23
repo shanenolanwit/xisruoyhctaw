@@ -1,9 +1,9 @@
 const WebSocket = require('ws');
 const readline = require('readline');
 
-function jsonify(type, name, text) {
+function jsonify(timestamp, name, text) { 
     data = {
-       type, name, text
+       timestamp, name, text
     }
     return JSON.stringify(data);
 }
@@ -19,14 +19,14 @@ ws.on('open', function() {
     rl.question('Enter your name: ', function(name) {
        
             rl.on('line', function(line) {
-                ws.send(jsonify('command', name, line));
+                const timestamp = new Date().getTime();
+                ws.send(jsonify(timestamp, name, line));
             });
         
     }); 
 })
 ws.on('message', function(data, flags) {
     console.log("got message")
-// convert the buffer to a string
     console.log(data.toString());
 })
 

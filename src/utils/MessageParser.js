@@ -1,4 +1,4 @@
-const Message = require('./Message');
+const Message = require('../domain/Message');
 
 module.exports = class MessageParser {
     static deserialize(data) {
