@@ -7,8 +7,8 @@ module.exports = class InMemoryMessageStore {
         return messageList;
     }
 
-    async addMessage(message) {
-        this.messageList.push(message);
+    async addMessage(msg, name, room) {
+        this.messageList.push(msg);
     }
     
     async setMessages(messages) {

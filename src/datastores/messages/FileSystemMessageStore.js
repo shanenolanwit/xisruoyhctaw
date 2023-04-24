@@ -1,4 +1,5 @@
 const Message = require("../../domain/Message");
+const MessageDecorator = require("../../utils/MessageDecorator");
 
 module.exports = class FilesystemMessageStore {
     constructor({path, fs }) {
@@ -40,8 +41,9 @@ module.exports = class FilesystemMessageStore {
         }
     }
 
-    async addMessage(message) {
+    async addMessage(msg, name, room) {
         const messageList = await this.getMessages();
+        const message = MessageDecorator.decorate(msg, name, room);
         messageList.push(message.serialize());
         await this.setMessages(messageList);
     }
@@ -49,7 +51,7 @@ module.exports = class FilesystemMessageStore {
     async setMessages(data) {
         await this.touch()
         try {
-          await this.fs.writeFile(this.path, JSON.stringify(data));
+          await this.fs.writeFile(this.path, JSON.stringify(data, null, 2));
         } catch (err) {
           console.error('File write failed:', err);
         }

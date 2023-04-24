@@ -1,21 +1,26 @@
 
 module.exports = class Message {
-    constructor({timestamp, name, text}) {
+    constructor({timestamp, text}) {
         this.timestamp = timestamp;
-        this.name = name;
         this.text = text;
+        this.name = ""
+        this.roopm = ""
     }
 
     getTimestamp() {
         return this.timestamp;
     }
 
-    getName() {
-        return this.name;
-    }
-
     getText() {
         return this.text;
+    }
+
+    setName(name) {
+        this.name = name
+    }
+
+    setRoom(room) {
+        this.room = room
     }
 
     isCommand() {
@@ -31,10 +36,18 @@ module.exports = class Message {
     }
 
     serialize() {
+        console.log("serializing message")
+        console.log({
+            timestamp: this.timestamp,
+            text: this.text,
+            name: this.name,
+            room: this.room
+        })
         return {
             timestamp: this.timestamp,
+            text: this.text,
             name: this.name,
-            text: this.text
+            room: this.room
         };
     }
 }
