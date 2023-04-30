@@ -60,11 +60,11 @@ module.exports = class FilesystemMessageStore {
     }
     
     async setMessages(data) {
-        await this.touch()
+        await this.touch();
         try {
           await this.fs.writeFile(this.path, JSON.stringify(data, null, 2));
         } catch (err) {
           console.error('File write failed:', err);
         }
-      } 
+    } 
 }
