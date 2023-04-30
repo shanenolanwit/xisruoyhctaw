@@ -4,14 +4,29 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "depcheck": "node_modules/.bin/depcheck . --ignores=\"pre-commit\"",
+    "lint": "node_modules/.bin/eslint src test",
+    "test": "./node_modules/.bin/mocha --recursive test/*"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/shanenolanwit/xisruoyhctaw.git"
   },
+  "devDependencies": {
+    "depcheck": "^0.8.3",
+    "dotenv": "^8.2.0",
+    "eslint": "^8.25.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-mocha": "^10.1.0",
+    "mocha": "^10.1.0"
+  },
   "dependencies": {
-    "ws": "^8.13.0"
+    "ws": "^8.13.0",
+    "node-fetch": "^2.6.7",
+    "dotenv": "^8.2.0",
+    "gpt-3-encoder": "^1.1.4",
+    "openai": "^3.2.1"
   },
   "author": "Shane Nolan",
   "license": "ISC",

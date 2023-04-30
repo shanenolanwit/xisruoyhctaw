@@ -10,7 +10,7 @@ module.exports = class JoinAction {
        
         // remove the participant from any other rooms
         socketTracker.removeParticipant(ws);
-        // check if any participants in the room
+        // check if any participants are in the room
         if (roomParticipants.length === 0) {
             ws.send("looks like you're the first one here")
         } else {

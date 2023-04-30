@@ -1,25 +1,23 @@
-const fs = require('fs').promises;
-const WebSocketServer = require('ws').Server
-const { OpenAIApi, Configuration } = require('openai');
-const FileSystemMessageStore = require('./datastores/messages/FileSystemMessageStore');
-const InMemoryMessageStore = require('./datastores/messages/InMemoryMessageStore');
-const SocketTracker = require('./websocket/utils/SocketTracker');
-const Summarizer = require('./utils/Summarizer');
+const fs = require('./FakeFS');
+const WebSocketServer = require('./FakeWebSocketServer');
+const OpenAIApi = require('./FakeOpenAI');
+const FileSystemMessageStore = require('../../src/datastores/messages/FileSystemMessageStore');
+const InMemoryMessageStore = require('../../src/datastores/messages/InMemoryMessageStore');
+const SocketTracker = require('../../src/websocket/utils/SocketTracker');
+const Summarizer = require('../../src/utils/Summarizer');
 
-module.exports = class DependencyManager {
+module.exports = class FakeDependencyManager {
     constructor({environment}) {
         this.environment = environment;
-        this.wss = new WebSocketServer({port: 8080});
+        this.wss = new WebSocketServer({port: 8080}); 
         this.socketTracker = new SocketTracker();
 
         const apiKey = environment.getOpenAIApiKey();
         const model = environment.getOpenAIModel();
-       
-        const configuration = new Configuration({apiKey});
-          
+        const configuration = { apiKey }
         const openai = new OpenAIApi(configuration);
 
-        this.summarizer = new Summarizer( {openai, model} ); 
+        this.summarizer = new Summarizer( { openai, model } ); 
 
         const storeType = environment.getMessageStoreType();
         switch (storeType) {

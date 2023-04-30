@@ -36,16 +36,10 @@ module.exports = class Message {
     }
 
     serialize() {
-        console.log("serializing message")
-        console.log({
-            timestamp: this.timestamp,
-            text: this.text,
-            name: this.name,
-            room: this.room
-        })
+       
         return {
             timestamp: this.timestamp,
-            text: this.text,
+            text: this.getTextWithoutCommand(),
             name: this.name,
             room: this.room
         };

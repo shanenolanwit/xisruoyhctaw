@@ -1,4 +1,3 @@
-const Message = require("../../domain/Message");
 const MessageDecorator = require("../../utils/MessageDecorator");
 
 module.exports = class FilesystemMessageStore {
@@ -39,6 +38,18 @@ module.exports = class FilesystemMessageStore {
             console.error('File read failed:', err);
             return messageList;
         }
+    }
+
+    async getMessagesForRoom(room) {
+        const messageList = await this.getMessages();
+        const messagesForRoom = messageList.filter((msg) => {
+            return msg.room === room;
+        });
+        // order the messages by timestamp from oldest to newest
+        messagesForRoom.sort((a, b) => {
+            return a.timestamp - b.timestamp;
+        });
+        return messagesForRoom;
     }
 
     async addMessage(msg, name, room) {

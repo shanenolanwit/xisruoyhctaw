@@ -1,7 +1,8 @@
 module.exports = class MessageAction {
-    static async execute(dependencyManager, store, ws, msg) {
+    static async execute(dependencyManager, ws, msg) {
         const socketTracker = dependencyManager.getSocketTracker();
         const participant = socketTracker.getParticipant(ws);
+        const store = dependencyManager.getStore();
         if (participant){
             const { room, name } = participant;
             await store.addMessage(msg, name, room);
