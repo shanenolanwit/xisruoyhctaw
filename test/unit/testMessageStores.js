@@ -45,14 +45,14 @@ describe('Unit - In memory message store', () => {
     assert.equal(messages.length, 1);
     assert.equal(messages[0].name, name);
     assert.equal(messages[0].text, 'hello');
-    // const messageTwo = new Message({ timestamp: 22222, text: '/msg goodbye' });
-    // await store.addMessage(messageTwo, name, room);
-    // const messagesTwo = await store.getMessagesForRoom(room);
-    // assert.equal(messagesTwo.length, 2);
-    // assert.equal(messagesTwo[0].name, name);
-    // assert.equal(messagesTwo[0].text, 'hello');
-    // assert.equal(messagesTwo[1].name, name);
-    // assert.equal(messagesTwo[1].text, 'goodbye');
+    const messageTwo = new Message({ timestamp: 22222, text: '/msg goodbye' });
+    await store.addMessage(messageTwo, name, room);
+    const messagesTwo = await store.getMessagesForRoom(room);
+    assert.equal(messagesTwo.length, 2);
+    assert.equal(messagesTwo[0].name, name);
+    assert.equal(messagesTwo[0].text, 'hello');
+    assert.equal(messagesTwo[1].name, name);
+    assert.equal(messagesTwo[1].text, 'goodbye');
   });
 
 });
